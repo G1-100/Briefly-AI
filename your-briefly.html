@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Briefly - Design Your Daily News</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="auth.js"></script>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-orb orb1"></div>
+        <div class="floating-orb orb2"></div>
+        <div class="floating-orb orb3"></div>
+    </div>
+
+    <div id="navbar-container"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="briefly-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-icon">✨</span>
+                        Design Your Perfect News Experience
+                    </div>
+                    <h1>Your Daily Briefly</h1>
+                    <p class="hero-subtitle">
+                        Handpick the stories that matter to you. Our AI will craft them into your personalized news broadcast.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Headlines per topic</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">AI</span>
+                            <span class="stat-label">Powered generation</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3-15</span>
+                            <span class="stat-label">Minute briefings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Topic Selection -->
+        <section class="topic-selection">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Choose Your Topics</h2>
+                    <p>Select the topics you want to stay informed about</p>
+                </div>
+                
+                <div class="topics-grid">
+                    <div class="topic-card" data-topic="technology">
+                        <div class="topic-icon">💻</div>
+                        <h3>Technology</h3>
+                        <p>Latest in tech, AI, and innovation</p>
+                        <div class="topic-toggle">
+                            <input type="checkbox" id="tech-toggle">
+                            <label for="tech-toggle"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card" data-topic="business">
+                        <div class="topic-icon">📈</div>
+                        <h3>Business</h3>
+                        <p>Markets, finance, and economy</p>
+                        <div class="topic-toggle">
+                            <input type="checkbox" id="business-toggle">
+                            <label for="business-toggle"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card" data-topic="science">
+                        <div class="topic-icon">🔬</div>
+                        <h3>Science</h3>
+                        <p>Research, discoveries, and breakthroughs</p>
+                        <div class="topic-toggle">
+                            <input type="checkbox" id="science-toggle">
+                            <label for="science-toggle"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card" data-topic="health">
+                        <div class="topic-icon">🏥</div>
+                        <h3>Health</h3>
+                        <p>Medical news and wellness</p>
+                        <div class="topic-toggle">
+                            <input type="checkbox" id="health-toggle">
+                            <label for="health-toggle"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card" data-topic="politics">
+                        <div class="topic-icon">🏛️</div>
+                        <h3>Politics</h3>
+                        <p>Government and policy updates</p>
+                        <div class="topic-toggle">
+                            <input type="checkbox" id="politics-toggle">
+                            <label for="politics-toggle"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card" data-topic="sports">
+                        <div class="topic-icon">⚽</div>
+                        <h3>Sports</h3>
+                        <p>Latest scores and sports news</p>
+                        <div class="topic-toggle">
+                            <input type="checkbox" id="sports-toggle">
+                            <label for="sports-toggle"></label>
+                        </div>
+                    </div>
+
+                    <div class="topic-card custom-topic-card" data-topic="custom">
+                        <div class="topic-icon">✏️</div>
+                        <h3>Custom Topic</h3>
+                        <p>Enter your own topic of interest</p>
+                        <div class="custom-topic-input">
+                            <input type="text" id="customTopicInput" placeholder="Enter custom topic..." class="custom-topic-field">
+                            <button type="button" id="addCustomTopic" class="add-topic-btn">Add</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="custom-topics-display" id="customTopicsDisplay" style="display: none;">
+                    <h3>Your Custom Topics</h3>
+                    <div class="custom-topics-list" id="customTopicsList">
+                        <!-- Custom topics will be added here -->
+                    </div>
+                </div>
+
+                <!-- API Key Section (Compact) -->
+                <div class="api-key-section">
+                    <div class="api-key-header">
+                        <h3>🔑 API Configuration</h3>
+                        <p>Add your Gemini API key for live headlines and audio generation</p>
+                    </div>
+                    <div class="api-key-input-container">
+                        <input type="password" id="geminiApiKey" placeholder="Enter your Gemini API key (optional for browsing)" class="api-key-input">
+                        <button type="button" id="toggleApiKey" class="toggle-key-btn" title="Show/Hide API Key">🙈</button>
+                    </div>
+                    <div class="api-key-help">
+                        <small>
+                            <a href="https://ai.google.dev/tutorials/setup" target="_blank">Get your free API key</a> • 
+                            No key? Browse with cached headlines • Key stored locally only
+                        </small>
+                    </div>
+                </div>
+                
+                <div class="continue-section">
+                    <button class="continue-btn" id="continueBtn" onclick="proceedToHeadlines()">
+                        Continue to Headlines
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <p class="selection-count">Select at least 2 topics to continue</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Headlines Selection (Initially Hidden) -->
+        <section class="headlines-selection" id="headlinesSection" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Select Your Stories</h2>
+                    <p>Choose multiple headlines from each topic that interest you</p>
+                </div>
+                
+                <!-- Topic Navigation -->
+                <div class="topic-navigation" id="topicNavigation" style="display: none;">
+                    <div class="nav-progress">
+                        <div class="progress-indicator">
+                            <span class="current-topic" id="currentTopicIndex">1</span>
+                            <span class="separator">of</span>
+                            <span class="total-topics" id="totalTopics">1</span>
+                        </div>
+                        <div class="topic-name" id="currentTopicName">Loading...</div>
+                    </div>
+                    
+                    <div class="nav-controls">
+                        <button class="nav-btn prev-btn" id="prevTopicBtn" onclick="navigateToTopic(-1)">
+                            <span class="nav-arrow">←</span>
+                            <span class="nav-text">Previous</span>
+                        </button>
+                        
+                        <div class="selection-status" id="selectionStatus">
+                            0 articles selected
+                        </div>
+                        
+                        <button class="nav-btn next-btn" id="nextTopicBtn" onclick="navigateToTopic(1)">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="headlines-container" id="headlinesContainer">
+                    <!-- Headlines will be dynamically generated here -->
+                </div>
+                
+                <div class="briefing-config">
+                    <div class="config-header">
+                        <h3>Briefing Configuration</h3>
+                        <p>Customize how your briefing will be delivered</p>
+                    </div>
+                    
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label for="briefingLength">Briefing Length</label>
+                            <div class="length-selector">
+                                <input type="range" id="briefingLength" min="3" max="10" value="5" class="length-slider">
+                                <div class="length-display">
+                                    <span id="lengthValue">5</span> minutes
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="voiceStyle">Voice Style</label>
+                            <select id="voiceStyle" class="voice-selector">
+                                <option value="professional">Professional News Anchor</option>
+                                <option value="conversational">Conversational & Friendly</option>
+                                <option value="energetic">Energetic & Upbeat</option>
+                                <option value="calm">Calm & Soothing</option>
+                            </select>
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="newsDepth">News Depth</label>
+                            <select id="newsDepth" class="depth-selector">
+                                <option value="summary">Quick Summary</option>
+                                <option value="balanced">Balanced Coverage</option>
+                                <option value="detailed">Detailed Analysis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="generate-section">
+                    <button class="generate-btn" id="generateBtn" onclick="generateBriefly()">
+                        <span class="btn-icon">🎙️</span>
+                        Generate My Briefly
+                        <span class="btn-shimmer"></span>
+                    </button>
+                    <p class="generate-note">This will create your personalized news broadcast</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generated Briefing (Initially Hidden) -->
+        <section class="generated-briefing" id="generatedSection" style="display: none;">
+            <div class="container">
+                <div class="briefing-header">
+                    <div class="success-badge">
+                        <span class="success-icon">✅</span>
+                        Briefing Generated Successfully!
+                    </div>
+                    <h2>Your Personalized Briefly</h2>
+                    <p>Your AI-generated news broadcast is ready</p>
+                    
+                    <!-- Usage Tips -->
+                    <div class="usage-tips">
+                        <div class="tip-item">
+                            <span class="tip-icon">💡</span>
+                            <span>Tip: Use spacebar to play/pause, or arrow keys to seek</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="briefing-player">
+                    <div class="player-card">
+                        <div class="player-header">
+                            <div class="player-info">
+                                <h3 id="briefingTitle">Daily Briefly - June 6, 2025</h3>
+                                <p id="briefingMeta">7 minutes • Professional voice • 4 topics</p>
+                            </div>
+                            <div class="player-status">
+                                <span class="status-badge">Ready to Play</span>
+                            </div>
+                        </div>
+                        
+                        <div class="player-controls">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                                <div class="progress-time">
+                                    <span id="currentTime">0:00</span>
+                                    <span id="totalTime">7:00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="control-buttons">
+                                <button class="control-btn" onclick="seekBackward()">⏪</button>
+                                <button class="play-btn" id="playBtn" onclick="togglePlayback()">
+                                    <span class="play-icon">▶️</span>
+                                </button>
+                                <button class="control-btn" onclick="seekForward()">⏩</button>
+                                <button class="control-btn" onclick="adjustSpeed()">1.0x</button>
+                            </div>
+                        </div>
+                        
+                        <div class="player-features">
+                            <button class="feature-btn" onclick="downloadBriefly()">
+                                <span>📱</span> Download
+                            </button>
+                            <button class="feature-btn" onclick="shareBriefly()">
+                                <span>📤</span> Share
+                            </button>
+                            <button class="feature-btn" onclick="addToPlaylist()">
+                                <span>📋</span> Save
+                            </button>
+                            <button class="feature-btn" onclick="regenerateBriefly()">
+                                <span>🔄</span> Regenerate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="briefing-summary">
+                    <h3>What's Covered</h3>
+                    <div class="summary-topics" id="summaryTopics">
+                        <!-- Will be populated with selected topics and headlines -->
+                    </div>
+                </div>
+                
+                <div class="next-actions">
+                    <button class="action-btn primary" onclick="createAnother()">
+                        Create Another Briefly
+                    </button>
+                    <button class="action-btn secondary" onclick="scheduleBriefly()">
+                        Schedule Daily Briefings
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="your-briefly.js"></script>
+</body>
+</html>

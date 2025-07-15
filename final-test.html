@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Fix Verification - Briefly AI</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #334155;
+            border-radius: 12px;
+            background: #1e293b;
+        }
+        .test-title {
+            color: #3b82f6;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 8px;
+        }
+        .status {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .status.pass { background: #16a34a; color: white; }
+        .status.fail { background: #dc2626; color: white; }
+        .status.pending { background: #f59e0b; color: white; }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 10px 10px 0;
+            font-size: 14px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .iframe-container {
+            margin: 20px 0;
+            border: 2px solid #475569;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 600px;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .checklist {
+            background: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .checklist ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .checklist li {
+            margin: 8px 0;
+            color: #d1d5db;
+        }
+        .results {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Final Fix Verification - Briefly AI</h1>
+    <p>Testing all three fixes that were implemented:</p>
+
+    <div class="test-section">
+        <div class="test-title">1. Developer Mode Button Text Fix</div>
+        <div class="status pending">Ready to Test</div>
+        <div class="checklist">
+            <strong>Test Steps:</strong>
+            <ul>
+                <li>Click "Test Developer Mode" to open main site</li>
+                <li>Press F12 to open console</li>
+                <li>Type: <code>window.yourBrieflyApp.enableDeveloperMode()</code></li>
+                <li>Look for orange "DEV MODE" indicator in top-right</li>
+                <li>Button should show "ON" when dev mode is active</li>
+                <li>Click the button to toggle - text should change to "OFF"</li>
+            </ul>
+        </div>
+        <button class="test-button" onclick="window.open('http://localhost:5001', '_blank')">Test Developer Mode</button>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">2. Headlines Timeout Fix</div>
+        <div class="status pending">Ready to Test</div>
+        <div class="checklist">
+            <strong>Test Steps:</strong>
+            <ul>
+                <li>Enable developer mode (see test 1)</li>
+                <li>Select some topics and generate headlines</li>
+                <li>Headlines should load from CSV and stay visible</li>
+                <li>Headlines should NOT disappear after timeout</li>
+                <li>Check console for "Headlines already loaded, skipping timeout fallback"</li>
+            </ul>
+        </div>
+        <button class="test-button" onclick="window.open('http://localhost:5001', '_blank')">Test Headlines Persistence</button>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">3. URL Display Instead of Descriptions</div>
+        <div class="status pending">Ready to Test</div>
+        <div class="checklist">
+            <strong>Test Steps:</strong>
+            <ul>
+                <li>Generate headlines (dev mode or regular mode)</li>
+                <li>Look at headline items</li>
+                <li>Should see URLs displayed under each headline title and source</li>
+                <li>URLs should be clickable blue links</li>
+                <li>Should NOT see article descriptions/summaries</li>
+            </ul>
+        </div>
+        <button class="test-button" onclick="window.open('http://localhost:5001', '_blank')">Test URL Display</button>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">4. Performance Optimizations</div>
+        <div class="status pending">Ready to Test</div>
+        <div class="checklist">
+            <strong>Test Steps:</strong>
+            <ul>
+                <li>Enable developer mode</li>
+                <li>Open browser console</li>
+                <li>Generate headlines and watch console output</li>
+                <li>Should see grouped topic logs instead of individual article logs</li>
+                <li>Processing should feel faster</li>
+                <li>Should see "Processing articles..." indicator</li>
+            </ul>
+        </div>
+        <button class="test-button" onclick="window.open('http://localhost:5001', '_blank')">Test Performance</button>
+    </div>
+
+    <div class="results">
+        <h3>🎯 Expected Results Summary</h3>
+        <ul>
+            <li><strong>Developer Mode Button:</strong> Shows "ON" when active, "OFF" when inactive</li>
+            <li><strong>Headlines Persistence:</strong> Headlines stay visible after loading, no disappearing</li>
+            <li><strong>URL Display:</strong> URLs shown instead of descriptions under headlines</li>
+            <li><strong>Performance:</strong> Faster loading with reduced console spam</li>
+        </ul>
+    </div>
+
+    <div class="iframe-container">
+        <iframe src="http://localhost:5001" title="Briefly AI - Main Application"></iframe>
+    </div>
+
+    <script>
+        // Add some interactive testing helpers
+        function showStatus(testNumber, status) {
+            const statusElement = document.querySelectorAll('.status')[testNumber - 1];
+            statusElement.className = `status ${status}`;
+            statusElement.textContent = status === 'pass' ? '✅ PASSED' : 
+                                      status === 'fail' ? '❌ FAILED' : 
+                                      '⏳ TESTING';
+        }
+
+        // Keyboard shortcuts for quick testing
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        window.open('http://localhost:5001', '_blank');
+                        showStatus(1, 'testing');
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        window.open('http://localhost:5001', '_blank');
+                        showStatus(2, 'testing');
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        window.open('http://localhost:5001', '_blank');
+                        showStatus(3, 'testing');
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        window.open('http://localhost:5001', '_blank');
+                        showStatus(4, 'testing');
+                        break;
+                }
+            }
+        });
+
+        console.log('🧪 Final Test Page Loaded');
+        console.log('💡 Keyboard shortcuts: Ctrl/Cmd + 1/2/3/4 to open tests');
+        console.log('🌐 Main app embedded below for quick testing');
+    </script>
+</body>
+</html>
